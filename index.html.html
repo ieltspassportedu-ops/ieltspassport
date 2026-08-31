@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS PASSPORT — Trung tâm tiếng Anh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16213E;
+    --navy-deep: #0E1730;
+    --paper: #F5F0E1;
+    --paper-soft: #EFE8D4;
+    --ink: #1C1B19;
+    --ink-soft: #4A473F;
+    --gold: #A9814C;
+    --gold-deep: #8A6A3C;
+    --stamp: #A23B3B;
+    --line: #D9CFB8;
+    --paper-on-navy: #E9E3D2;
+
+    --serif: 'Fraunces', serif;
+    --sans: 'Public Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+
+    --maxw: 1180px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color: inherit; text-decoration: none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3,p{ margin:0; }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  :focus-visible{
+    outline: 2.5px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(245,240,225,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 32px;
+    max-width: var(--maxw);
+    margin: 0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--serif);
+    font-weight:600;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+  .brand .stamp-mark{
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--navy);
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--navy);
+    flex-shrink:0;
+  }
+  .brand .stamp-mark svg{ width:16px; height:16px; }
+
+  nav.links{ display:flex; align-items:center; gap: 34px; }
+  nav.links a{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: color .18s ease, border-color .18s ease;
+  }
+  nav.links a:hover{ color: var(--navy); border-color: var(--gold); }
+
+  .nav-cta{
+    background: var(--navy);
+    color: var(--paper) !important;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background .18s ease;
+  }
+  .nav-cta:hover{ background: var(--navy-deep); }
+
+  .nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:6px; }
+  .nav-toggle span{ display:block; width:22px; height:2px; background: var(--navy); margin: 5px 0; }
+
+  /* ---------- HERO ---------- */
+  section.hero{
+    padding: 76px 0 64px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  .passport-page{
+    background: var(--paper-on-navy);
+    border: 1px solid var(--navy);
+    border-radius: 4px;
+    padding: 28px 26px;
+    position: relative;
+  }
+  .passport-page::before{
+    content:'';
+    position:absolute; inset: 8px;
+    border: 1px dashed rgba(22,33,62,0.35);
+    border-radius: 2px;
+    pointer-events:none;
+  }
+  .passport-page .pp-head{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom: 22px;
+  }
+  .passport-page .pp-head .globe{
+    width:46px; height:46px;
+  }
+  .passport-page .pp-head .stamp-graphic{
+    width: 84px; height: 84px;
+    border: 2px solid var(--stamp);
+    border-radius: 50%;
+    display:flex; align-items:center; justify-content:center;
+    transform: rotate(-11deg);
+    animation: stamp-in .7s cubic-bezier(.2,.9,.3,1.1) .25s both;
+  }
+  .passport-page .pp-head .stamp-graphic::before{
+    content:'';
+    position:absolute;
+    width: 70px; height: 70px;
+    border: 1px solid var(--stamp);
+    border-radius: 50%;
+  }
+  .passport-page .pp-head .stamp-graphic span{
+    font-family: var(--mono);
+    color: var(--stamp);
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-align:center;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+  }
+  @keyframes stamp-in{
+    0%{ opacity:0; transform: scale(1.6) rotate(-11deg); }
+    70%{ opacity:1; }
+    100%{ opacity:1; transform: scale(1) rotate(-11deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .passport-page .pp-head .stamp-graphic{ animation:none; }
+  }
+
+  .pp-field{
+    display:flex; justify-content:space-between; gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(22,33,62,0.15);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+  }
+  .pp-field:last-child{ border-bottom:none; }
+  .pp-field .k{ color: var(--ink-soft); }
+  .pp-field .v{ color: var(--navy); font-weight:700; text-align:right; }
+
+  .hero-copy h1{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(2.1rem, 3.6vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--navy);
+    max-width: 15ch;
+  }
+  .hero-copy p.lede{
+    margin-top: 20px;
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .hero-actions{
+    margin-top: 30px;
+    display:flex; align-items:center; gap: 22px; flex-wrap:wrap;
+  }
+
+  .ticket-btn{
+    position:relative;
+    display:inline-block;
+    background: var(--stamp);
+    color: var(--paper) !important;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 28px;
+    border-radius: 2px;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .ticket-btn::before,.ticket-btn::after{
+    content:'';
+    position:absolute;
+    top:50%; transform: translateY(-50%);
+    width: 14px; height:14px;
+    background: var(--paper);
+    border-radius: 50%;
+  }
+  .ticket-btn::before{ left:-7px; }
+  .ticket-btn::after{ right:-7px; }
+  .ticket-btn:hover{ background:#8c3232; transform: translateY(-1px); }
+
+  .text-link{
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy);
+    border-bottom: 1.5px solid var(--gold);
+    padding-bottom: 2px;
+  }
+
+  /* ---------- STATS ---------- */
+  section.stats{
+    border-bottom: 1px solid var(--line);
+    background: var(--paper-soft);
+  }
+  .stats-row{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item{
+    padding: 30px 28px;
+    border-left: 1px solid var(--line);
+  }
+  .stat-item:first-child{ border-left:none; }
+  .stat-item .num{
+    font-family: var(--mono);
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .stat-item .label{
+    margin-top: 6px;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .section-head h2{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    color: var(--navy);
+  }
+  .section-head p{
+    max-width: 40ch;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+  }
+  section.block{ padding: 84px 0; }
+  section.block.alt{ background: var(--paper-soft); }
+
+  /* ---------- COURSES ---------- */
+  .courses-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+  }
+  .course-card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 30px 24px;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .course-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 14px 26px rgba(22,33,62,0.1);
+  }
+  .course-badge{
+    width: 64px; height:64px;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-align:center;
+    line-height:1.15;
+    margin-bottom: 20px;
+  }
+  .course-card:nth-child(1) .course-badge{ transform: rotate(-6deg); border-color: var(--navy); color: var(--navy); }
+  .course-card:nth-child(2) .course-badge{ transform: rotate(4deg); border-color: var(--stamp); color: var(--stamp); }
+  .course-card:nth-child(3) .course-badge{ transform: rotate(-3deg); border-color: var(--gold-deep); color: var(--gold-deep); }
+  .course-card:nth-child(4) .course-badge{ transform: rotate(5deg); border-color: var(--navy); color: var(--navy); }
+
+  .course-card h3{
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .course-card p{
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .course-card a{
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--navy);
+    border-bottom: 1.5px solid var(--gold);
+  }
+
+  /* ---------- LIBRARY ---------- */
+  .library-list{ display:flex; flex-direction:column; gap: 16px; }
+  .book-row{
+    display:grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items:center;
+    gap: 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    position: relative;
+  }
+  .book-row::before, .book-row::after{
+    content:'';
+    position:absolute;
+    width: 16px; height:16px;
+    background: var(--paper-soft);
+    border-radius: 50%;
+    top:50%; transform: translateY(-50%);
+  }
+  section.block:not(.alt) .book-row::before, section.block:not(.alt) .book-row::after{
+    background: var(--paper);
+  }
+  .book-icon{
+    width: 40px; height:40px;
+    border: 1.5px solid var(--navy);
+    border-radius: 3px;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--navy);
+    flex-shrink:0;
+  }
+  .book-icon svg{ width:18px; height:18px; }
+  .book-meta h4{
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .book-meta span{
+    display:block;
+    margin-top: 3px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .book-tag{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 5px 12px;
+    white-space: nowrap;
+  }
+  .book-dl{
+    display:flex; align-items:center; gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 9px 16px;
+    border: 1.5px solid var(--navy);
+    border-radius: 3px;
+    transition: background .15s ease, color .15s ease;
+    white-space: nowrap;
+  }
+  .book-dl:hover{ background: var(--navy); color: var(--paper); }
+  .book-dl svg{ width:14px; height:14px; }
+
+  /* ---------- BLOG ---------- */
+  .blog-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .blog-card{
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 26px 24px 24px;
+    position: relative;
+    transition: transform .2s ease;
+  }
+  section.block.alt .blog-card{ background: var(--paper); }
+  .blog-card:hover{ transform: translateY(-4px); }
+  .postmark{
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 58px; height:58px;
+    border: 1.5px solid var(--stamp);
+    border-radius: 50%;
+    transform: rotate(9deg);
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight:700;
+    color: var(--stamp);
+    text-align:center;
+    line-height:1.2;
+  }
+  .blog-card h3{
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 600;
+    max-width: 80%;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .blog-card p{
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .blog-card a{
+    font-size: 0.85rem;
+    font-weight:700;
+    color: var(--navy);
+    border-bottom: 1.5px solid var(--gold);
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer.site-footer{
+    background: var(--navy);
+    color: var(--paper-on-navy);
+    padding: 72px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(233,227,210,0.18);
+  }
+  .footer-brand .brand{ color: var(--paper-on-navy); }
+  .footer-brand .brand .stamp-mark{ border-color: var(--paper-on-navy); color: var(--paper-on-navy); }
+  .footer-brand p{
+    margin-top: 14px;
+    font-size: 0.92rem;
+    color: rgba(233,227,210,0.72);
+    max-width: 34ch;
+  }
+  .footer-col h5{
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight:600;
+    margin-bottom: 16px;
+    color: var(--paper-on-navy);
+  }
+  .footer-col ul li{ margin-bottom: 10px; }
+  .footer-col a, .footer-col span{
+    font-size: 0.9rem;
+    color: rgba(233,227,210,0.75);
+  }
+  .footer-col a:hover{ color: var(--gold); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top: 24px;
+    font-size: 0.82rem;
+    color: rgba(233,227,210,0.5);
+    flex-wrap: wrap; gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 920px){
+    .hero-grid{ grid-template-columns: 1fr; }
+    .passport-page{ max-width: 420px; }
+    .stats-row{ grid-template-columns: repeat(2,1fr); }
+    .stat-item:nth-child(3){ border-left:none; }
+    .stat-item{ border-bottom: 1px solid var(--line); }
+    .courses-grid{ grid-template-columns: repeat(2,1fr); }
+    .blog-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 640px){
+    .wrap, .nav-inner{ padding-left: 20px; padding-right: 20px; }
+    nav.links{
+      position: absolute; top: 100%; left:0; right:0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      padding: 12px 20px 20px;
+      display:none;
+    }
+    nav.links.open{ display:flex; }
+    nav.links a{ width:100%; padding: 10px 0; }
+    .nav-cta{ margin-top: 8px; }
+    .nav-toggle{ display:block; }
+    .courses-grid{ grid-template-columns: 1fr; }
+    .book-row{ grid-template-columns: auto 1fr; row-gap: 12px; }
+    .book-tag{ grid-column: 1 / -1; justify-self: start; }
+    .book-dl{ grid-column: 1 / -1; justify-self: start; }
+    section.block{ padding: 56px 0; }
+    section.hero{ padding: 52px 0 44px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="stamp-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+      </span>
+      IELTS PASSPORT
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#courses">Khóa học</a>
+      <a href="#library">Thư viện sách</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Liên hệ</a>
+      <a href="#contact" class="nav-cta">Đăng ký học thử</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Mở menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="passport-page">
+        <div class="pp-head">
+          <svg class="globe" viewBox="0 0 48 48" fill="none" stroke="#16213E" stroke-width="1.3">
+            <circle cx="24" cy="24" r="18"/>
+            <ellipse cx="24" cy="24" rx="7" ry="18"/>
+            <path d="M6 24h36M8 15h32M8 33h32"/>
+          </svg>
+          <div class="stamp-graphic"><span>BAND<br>MỤC TIÊU<br>ĐẠT ĐƯỢC</span></div>
+        </div>
+        <div class="pp-field"><span class="k">Tên chương trình</span><span class="v">IELTS PASSPORT</span></div>
+        <div class="pp-field"><span class="k">Nơi cấp</span><span class="v">Đà Nẵng, VN</span></div>
+        <div class="pp-field"><span class="k">Loại hình</span><span class="v">Luyện thi &amp; Anh ngữ</span></div>
+        <div class="pp-field"><span class="k">Giá trị</span><span class="v">Trọn lộ trình</span></div>
+      </div>
+
+      <div class="hero-copy">
+        <h1>Tấm hộ chiếu đưa bạn đến điểm IELTS mơ ước</h1>
+        <p class="lede">IELTS Passport đồng hành cùng bạn qua từng chặng: từ nền tảng ngữ pháp đến chiến thuật phòng thi, với lộ trình cá nhân hóa theo band điểm và thời gian bạn có.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="ticket-btn">Đăng ký học thử miễn phí</a>
+          <a href="#courses" class="text-link">Xem các khóa học</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="wrap stats-row">
+      <div class="stat-item">
+        <div class="num">850+</div>
+        <div class="label">Học viên đã đồng hành</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">7.0</div>
+        <div class="label">Band điểm trung bình đầu ra</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">92%</div>
+        <div class="label">Học viên đạt mục tiêu đề ra</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">10+</div>
+        <div class="label">Năm kinh nghiệm giảng dạy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="block" id="courses">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Khóa học</h2>
+        <p>Mỗi khóa học là một chặng trên hành trình chinh phục band điểm của riêng bạn.</p>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card">
+          <div class="course-badge">4.0–5.0</div>
+          <h3>Nền tảng</h3>
+          <p>Xây chắc ngữ pháp, từ vựng cốt lõi và phát âm — bước khởi đầu cho người mới học IELTS.</p>
+          <a href="#contact">Tìm hiểu thêm</a>
+        </div>
+        <div class="course-card">
+          <div class="course-badge">5.5–6.5</div>
+          <h3>Tăng tốc</h3>
+          <p>Luyện đều 4 kỹ năng theo đúng định dạng đề thi thật, tăng tốc độ và độ chính xác.</p>
+          <a href="#contact">Tìm hiểu thêm</a>
+        </div>
+        <div class="course-card">
+          <div class="course-badge">7.0+</div>
+          <h3>Luyện đích</h3>
+          <p>Chiến thuật làm bài nâng cao, luyện đề chuyên sâu cho học viên nhắm band điểm cao.</p>
+          <a href="#contact">Tìm hiểu thêm</a>
+        </div>
+        <div class="course-card">
+          <div class="course-badge">1:1</div>
+          <h3>Cá nhân hóa</h3>
+          <p>Lộ trình riêng, xây dựng theo đúng mục tiêu, điểm mạnh và thời gian biểu của bạn.</p>
+          <a href="#contact">Tìm hiểu thêm</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIBRARY -->
+  <section class="block alt" id="library">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Thư viện sách</h2>
+        <p>Tài liệu được tuyển chọn và cập nhật thường xuyên, miễn phí cho học viên trung tâm.</p>
+      </div>
+      <div class="library-list">
+
+        <div class="book-row">
+          <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+          <div class="book-meta">
+            <h4>Cambridge IELTS 18</h4>
+            <span>Cambridge University Press — Bộ đề thi thật, đủ 4 kỹ năng</span>
+          </div>
+          <span class="book-tag">Full Test</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+
+        <div class="book-row">
+          <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+          <div class="book-meta">
+            <h4>English Grammar in Use</h4>
+            <span>Raymond Murphy — Ngữ pháp căn bản đến nâng cao</span>
+          </div>
+          <span class="book-tag">Ngữ pháp</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+
+        <div class="book-row">
+          <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+          <div class="book-meta">
+            <h4>Từ vựng IELTS theo chủ đề</h4>
+            <span>IELTS Passport biên soạn — 25 chủ đề thường gặp</span>
+          </div>
+          <span class="book-tag">Từ vựng</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+
+        <div class="book-row">
+          <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+          <div class="book-meta">
+            <h4>Mẫu bài Writing Task 2</h4>
+            <span>IELTS Passport biên soạn — Kèm dàn ý &amp; nhận xét</span>
+          </div>
+          <span class="book-tag">Writing</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section class="block" id="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Blog chia sẻ kiến thức</h2>
+        <p>Mẹo học, kinh nghiệm thi thật và những điều ít ai nói với bạn về IELTS.</p>
+      </div>
+      <div class="blog-grid">
+        <div class="blog-card">
+          <div class="postmark">SPEAKING<br>4 phút</div>
+          <h3>5 lỗi phát âm người Việt hay mắc khi thi Speaking</h3>
+          <p>Từ trọng âm từ đến ngữ điệu cuối câu — những lỗi nhỏ khiến giám khảo trừ điểm nhiều nhất.</p>
+          <a href="#">Đọc bài viết</a>
+        </div>
+        <div class="blog-card">
+          <div class="postmark">WRITING<br>6 phút</div>
+          <h3>Lập dàn ý Writing Task 2 trong 5 phút</h3>
+          <p>Một khung dàn ý đơn giản giúp bạn viết đủ ý, đúng cấu trúc mà không mất thời gian suy nghĩ.</p>
+          <a href="#">Đọc bài viết</a>
+        </div>
+        <div class="blog-card">
+          <div class="postmark">TỰ HỌC<br>5 phút</div>
+          <h3>Lộ trình tự học IELTS tại nhà trong 3 tháng</h3>
+          <p>Kế hoạch tuần cụ thể cho người tự học, từ mất gốc đến sẵn sàng bước vào phòng thi.</p>
+          <a href="#">Đọc bài viết</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <span class="stamp-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+          </span>
+          IELTS PASSPORT
+        </a>
+        <p>Trung tâm luyện thi IELTS &amp; Anh ngữ tại Đà Nẵng. Đồng hành cùng bạn từ nền tảng đến band điểm mục tiêu.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Điều hướng</h5>
+        <ul>
+          <li><a href="#courses">Khóa học</a></li>
+          <li><a href="#library">Thư viện sách</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Liên hệ</h5>
+        <ul>
+          <li><span>0900 000 000 (Zalo)</span></li>
+          <li><span>hoc@ieltspassport.vn</span></li>
+          <li><span>Đà Nẵng, Việt Nam</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IELTS Passport. Bản demo website.</span>
+      <span>Thiết kế theo chủ đề hành trình &amp; hộ chiếu</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
