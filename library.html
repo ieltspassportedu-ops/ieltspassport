@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thư viện sách — IELTS PASSPORT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #16213E;
+    --navy-deep: #0E1730;
+    --paper: #F5F0E1;
+    --paper-soft: #EFE8D4;
+    --ink: #1C1B19;
+    --ink-soft: #4A473F;
+    --gold: #A9814C;
+    --gold-deep: #8A6A3C;
+    --stamp: #A23B3B;
+    --line: #D9CFB8;
+    --paper-on-navy: #E9E3D2;
+
+    --serif: 'Fraunces', serif;
+    --sans: 'Public Sans', sans-serif;
+    --mono: 'Space Mono', monospace;
+
+    --maxw: 1180px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img,svg{ display:block; max-width:100%; }
+  a{ color: inherit; text-decoration: none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  h1,h2,h3,h4,p{ margin:0; }
+  .wrap{ max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+  :focus-visible{ outline: 2.5px solid var(--gold); outline-offset: 3px; }
+
+  /* NAV */
+  header.site-nav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(245,240,225,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 32px; max-width: var(--maxw); margin: 0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family: var(--serif); font-weight:600; font-size: 1.15rem; letter-spacing: 0.02em;
+  }
+  .brand .stamp-mark{
+    width: 30px; height: 30px; border: 1.5px solid var(--navy); border-radius: 50%;
+    display:flex; align-items:center; justify-content:center; color: var(--navy); flex-shrink:0;
+  }
+  .brand .stamp-mark svg{ width:16px; height:16px; }
+  .back-link{
+    display:flex; align-items:center; gap:8px;
+    font-size: 0.92rem; font-weight:600; color: var(--ink-soft);
+    transition: color .18s ease;
+  }
+  .back-link:hover{ color: var(--navy); }
+  .back-link svg{ width:16px; height:16px; }
+
+  /* PAGE HEAD */
+  section.page-head{
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .page-head-row{
+    display:flex; justify-content: space-between; align-items:flex-end; gap: 24px; flex-wrap:wrap;
+  }
+  .page-head h1{
+    font-family: var(--serif); font-weight:600;
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    color: var(--navy);
+    max-width: 16ch;
+  }
+  .page-head p{
+    margin-top: 14px;
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+  }
+  .page-head .count{
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--gold-deep);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 7px 16px;
+    white-space: nowrap;
+  }
+
+  /* FILTER TABS */
+  section.filter-bar{
+    position: sticky; top: 67px; z-index: 40;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0;
+  }
+  .tabs{
+    display:flex; gap: 10px; flex-wrap: wrap;
+  }
+  .tab-btn{
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all .15s ease;
+  }
+  .tab-btn:hover{ border-color: var(--gold); color: var(--navy); }
+  .tab-btn.active{
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--paper);
+  }
+
+  /* LIBRARY GRID */
+  section.library-body{ padding: 52px 0 96px; }
+  .lib-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .book-card{
+    background: var(--paper-soft);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px 22px;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .book-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 14px 26px rgba(22,33,62,0.1);
+  }
+  .book-card .book-icon{
+    width: 42px; height:42px;
+    border: 1.5px solid var(--navy);
+    border-radius: 3px;
+    display:flex; align-items:center; justify-content:center;
+    color: var(--navy);
+  }
+  .book-card .book-icon svg{ width:19px; height:19px; }
+  .book-card h4{
+    font-family: var(--serif); font-weight:600; font-size: 1.05rem; color: var(--ink);
+  }
+  .book-card .author{
+    font-size: 0.86rem; color: var(--ink-soft);
+  }
+  .book-card .row-bottom{
+    margin-top: auto;
+    display:flex; align-items:center; justify-content: space-between; gap: 10px;
+    padding-top: 6px;
+  }
+  .book-card .book-tag{
+    font-family: var(--mono); font-size: 0.7rem; font-weight:700;
+    color: var(--gold-deep); border: 1px solid var(--gold); border-radius: 20px;
+    padding: 4px 11px; white-space: nowrap;
+  }
+  .book-card .book-dl{
+    display:flex; align-items:center; gap: 6px;
+    font-size: 0.82rem; font-weight:700; color: var(--navy);
+    padding: 8px 13px; border: 1.5px solid var(--navy); border-radius: 3px;
+    transition: background .15s ease, color .15s ease;
+    white-space: nowrap;
+  }
+  .book-card .book-dl:hover{ background: var(--navy); color: var(--paper); }
+  .book-card .book-dl svg{ width:13px; height:13px; }
+
+  .empty-state{
+    display:none;
+    text-align:center;
+    padding: 60px 20px;
+    color: var(--ink-soft);
+    font-family: var(--serif);
+    font-size: 1.1rem;
+  }
+  .empty-state.show{ display:block; }
+
+  /* FOOTER */
+  footer.site-footer{
+    background: var(--navy); color: var(--paper-on-navy); padding: 44px 0;
+  }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size: 0.82rem; color: rgba(233,227,210,0.6); flex-wrap: wrap; gap:10px;
+  }
+  .footer-bottom a{ color: var(--paper-on-navy); font-weight:600; }
+  .footer-bottom a:hover{ color: var(--gold); }
+
+  @media (max-width: 920px){
+    .lib-grid{ grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 640px){
+    .wrap, .nav-inner{ padding-left: 20px; padding-right: 20px; }
+    .lib-grid{ grid-template-columns: 1fr; }
+    section.page-head{ padding: 40px 0 28px; }
+    section.library-body{ padding: 36px 0 64px; }
+    .brand span:not(.stamp-mark){ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="stamp-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+      </span>
+      <span>IELTS PASSPORT</span>
+    </a>
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>
+      Về trang chủ
+    </a>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap page-head-row">
+    <div>
+      <h1>Thư viện sách</h1>
+      <p>Tài liệu được tuyển chọn và cập nhật thường xuyên, miễn phí cho học viên trung tâm. Lọc theo thể loại để tìm đúng thứ bạn cần.</p>
+    </div>
+    <span class="count" id="resultCount">14 tài liệu</span>
+  </div>
+</section>
+
+<section class="filter-bar">
+  <div class="wrap tabs" id="tabs">
+    <button class="tab-btn active" data-cat="all">Tất cả</button>
+    <button class="tab-btn" data-cat="grammar">Ngữ pháp</button>
+    <button class="tab-btn" data-cat="vocab">Từ vựng</button>
+    <button class="tab-btn" data-cat="listening">Nghe</button>
+    <button class="tab-btn" data-cat="speaking">Nói</button>
+    <button class="tab-btn" data-cat="reading">Đọc</button>
+    <button class="tab-btn" data-cat="writing">Viết</button>
+    <button class="tab-btn" data-cat="test">Đề thi thật</button>
+  </div>
+</section>
+
+<section class="library-body">
+  <div class="wrap">
+    <div class="lib-grid" id="libGrid">
+
+      <div class="book-card" data-cat="test">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Cambridge IELTS 18</h4>
+        <span class="author">Cambridge University Press</span>
+        <div class="row-bottom">
+          <span class="book-tag">Đề thi thật</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="test">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Cambridge IELTS 17</h4>
+        <span class="author">Cambridge University Press</span>
+        <div class="row-bottom">
+          <span class="book-tag">Đề thi thật</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="grammar">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>English Grammar in Use</h4>
+        <span class="author">Raymond Murphy</span>
+        <div class="row-bottom">
+          <span class="book-tag">Ngữ pháp</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="grammar">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Ngữ pháp trọng tâm cho IELTS</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Ngữ pháp</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="vocab">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Từ vựng IELTS theo chủ đề</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Từ vựng</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="vocab">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Check Your English Vocabulary for IELTS</h4>
+        <span class="author">Rawdon Wyatt</span>
+        <div class="row-bottom">
+          <span class="book-tag">Từ vựng</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="listening">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Basic IELTS Listening</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Nghe</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="listening">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Bí quyết nghe hiểu accent Anh–Anh &amp; Anh–Mỹ</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Nghe</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="speaking">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Ngân hàng câu hỏi Speaking Part 1–3</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Nói</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="speaking">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>5 lỗi phát âm người Việt hay mắc</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Nói</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="reading">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Chiến thuật làm Reading nhanh &amp; đúng</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Đọc</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="reading">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Từ vựng học thuật thường gặp trong Reading</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Đọc</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="writing">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Mẫu bài Writing Task 2</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Viết</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+      <div class="book-card" data-cat="writing">
+        <div class="book-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h9a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4Z"/><path d="M16 4h4v16h-4"/></svg></div>
+        <h4>Cấu trúc câu nâng band Writing Task 1</h4>
+        <span class="author">IELTS Passport biên soạn</span>
+        <div class="row-bottom">
+          <span class="book-tag">Viết</span>
+          <a href="#" class="book-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v12m0 0-4-4m4 4 4-4M5 20h14"/></svg>Tải PDF</a>
+        </div>
+      </div>
+
+    </div>
+    <p class="empty-state" id="emptyState">Chưa có tài liệu nào trong thể loại này.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <span>© 2026 IELTS Passport. Thư viện sách.</span>
+    <a href="index.html">← Về trang chủ</a>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const cards = document.querySelectorAll('.book-card');
+  const resultCount = document.getElementById('resultCount');
+  const emptyState = document.getElementById('emptyState');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      let visible = 0;
+      cards.forEach(card => {
+        const match = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      resultCount.textContent = visible + ' tài liệu';
+      emptyState.classList.toggle('show', visible === 0);
+    });
+  });
+</script>
+
+</body>
+</html>
